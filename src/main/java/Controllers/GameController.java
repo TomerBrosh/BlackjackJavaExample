@@ -1,16 +1,23 @@
-package Models;
+package Controllers;
+
+import Models.Deck;
+import Models.Hand;
+import Views.PrintHelper;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import static Views.PrintHelper.print;
+import static Views.PrintHelper.printStartingMessage;
+
 /**
  * Created by hackeru on 27/11/2016.
  */
-public class Game {
+public class GameController {
 
-    private static Game gameInstance = null;
+    private static GameController gameInstance = null;
+    private DeckController deckController;
     private Hand playersHand;
-    private Deck deck;
     private Hand dealersHand;
     private DataInputStream keyboardInput;
     private boolean didPlayerWin = false;
@@ -19,21 +26,21 @@ public class Game {
     private boolean didPlayerStand = false;
     private boolean didDealerStand = false;
 
-    private Game() {
+    private GameController() {
         keyboardInput = new DataInputStream(System.in);
-        deck = new Deck();
+        deckController = DeckController.getInstance(new Deck());
     }
 
-    public static Game getInstance() {
+    public static GameController getInstance() {
         if (gameInstance == null) {
-            gameInstance = new Game();
+            gameInstance = new GameController();
         }
 
         return gameInstance;
     }
 
     public void play() throws IOException {
-        System.out.println(PrintHelper.ANSI_GREEN + "Welcome to Blackjack!" + PrintHelper.ANSI_BLACK);
+        printStartingMessage();
         initialDeal();
         while (!isGameEnded) {
             if (isPlayerTurn) {
@@ -41,7 +48,7 @@ public class Game {
                 switch (action) {
                     case 1:
                         PrintHelper.printYellow("Player Hit!");
-                        playersHand.addCard(deck.deal());
+                        playersHand.addCard(deckController.deal());
                         playersHand.show(true);
                         didPlayerStand = false;
                         break;
@@ -53,7 +60,7 @@ public class Game {
 
             } else {
                 if (dealersHand.getScore() < 17) {
-                    dealersHand.addCard(deck.deal());
+                    dealersHand.addCard(deckController.deal());
                     dealersHand.show(false);
                     didDealerStand = false;
                 } else {
@@ -118,10 +125,10 @@ public class Game {
         dealersHand = new Hand();
 
         for (int i = 0; i < 2; ++i) {
-            playersHand.addCard(deck.deal());
+            playersHand.addCard(deckController.deal());
         }
 
-        dealersHand.addCard(deck.deal());
+        dealersHand.addCard(deckController.deal());
         dealersHand.show(false, true);
         playersHand.show(true, false);
     }

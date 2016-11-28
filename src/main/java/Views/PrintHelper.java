@@ -1,8 +1,6 @@
-package Models;
+package Views;
 
-import java.awt.datatransfer.StringSelection;
-
-import static Models.Card.CardSuit.*;
+import Models.Card;
 
 /**
  * Created by hackeru on 27/11/2016.
@@ -55,11 +53,20 @@ public class PrintHelper {
         System.out.println(ANSI_BLUE + string + ANSI_RESET);
     }
 
-    public static void PrintCardArray(Card[] cardList){
+    public static void printCardArray(Card[] cardList){
         for (Card card :
                 cardList) {
             printCard(card);
         }
     }
+
+    public static void print(String string){
+        System.out.println(string);
+    }
+    public static void printStartingMessage(){
+        System.out.println(PrintHelper.ANSI_GREEN + "Welcome to Blackjack!" + PrintHelper.ANSI_RESET);
+    }
+
+
 
 }

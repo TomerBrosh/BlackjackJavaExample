@@ -1,6 +1,4 @@
-import Models.Card;
-import Models.Game;
-import Models.PrintHelper;
+import Controllers.GameController;
 
 import java.io.IOException;
 
@@ -10,7 +8,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String args[]) throws IOException {
 //            Card[] cardList = new Card[]{new Card(0),new Card(13),new Card(26),new Card(39),new Card(51)};
-//            PrintHelper.PrintCardArray(cardList);
-        Game.getInstance().play();
+//            PrintHelper.printCardArray(cardList);
+        GameController.getInstance().play();
     }
 }

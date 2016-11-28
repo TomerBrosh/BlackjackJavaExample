@@ -5,9 +5,9 @@ package Models;
  */
 public class Card {
 
-    int weight;
-    CardValue value;
-    CardSuit suit;
+    public int weight;
+    public CardValue value;
+    public CardSuit suit;
 
     public enum CardValue {
         N1, N2, N3, N4, N5, N6, N7, N8, N9, N10, J, Q, K, A;
@@ -59,10 +59,6 @@ public class Card {
 
     public int getValue() {
         return weight;
-    }
-
-    public void Print() {
-        PrintHelper.printCard(this);
     }
 
  }

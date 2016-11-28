@@ -1,5 +1,7 @@
 package Models;
 
+import Views.PrintHelper;
+
 /**
  * Created by hackeru on 27/11/2016.
  */
@@ -15,12 +17,12 @@ public class Hand {
         cards = new Card[MAX_CARDS];
     }
 
-    void addCard(Card c) {
+    public void addCard(Card c) {
         cards[cardsAmount] = c;
         ++cardsAmount;
     }
 
-    void show(boolean isUser, boolean hideFirstCard) {
+    public void show(boolean isUser, boolean hideFirstCard) {
         String name = isUser ? "Player" : "Dealer";
         if (isUser) PrintHelper.printYellow(" " + name + ":");
         else PrintHelper.printPurple(" " + name + ":");
@@ -34,7 +36,7 @@ public class Hand {
 
     }
 
-    void show(boolean isUser) {
+    public void show(boolean isUser) {
         String name = isUser ? "Player" : "Dealer";
         if (isUser) PrintHelper.printYellow(" " + name + ":");
         else PrintHelper.printPurple(" " + name + ":");
@@ -71,14 +73,14 @@ public class Hand {
         return points;
     }
 
-    boolean isUnder22() {
+    public boolean isUnder22() {
         int points = 0;
         for (int i = 0; i < cardsAmount; ++i) points += cards[i].weight;
         if (points < 22) return true;
         else return false;
     }
 
-    boolean isBusted() {
+    public boolean isBusted() {
         if (!isUnder22()) return true;
         else return false;
     }
